@@ -2,10 +2,6 @@ const { Sequelize } = require("sequelize");
 
 module.exports = (sequelize) => {
     sequelize.define('grupo', {
-        produto : {
-            type : Sequelize.STRING(50),
-            allowNull : false
-        },
         id : {
             type : Sequelize.INTEGER.UNSIGNED,
             primaryKey : true,
@@ -15,6 +11,12 @@ module.exports = (sequelize) => {
         descrição : {
             type : Sequelize.STRING(200),
             allowNull : false
+        },
+        status: {
+            type : Sequelize.STRING(1),
+            allowNull : false
         }
+            
+        
     })
 }
