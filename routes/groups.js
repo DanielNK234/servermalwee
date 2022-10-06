@@ -11,22 +11,48 @@ knl.post('group', async(req, resp) => {
 
     knl.validate(req.body, schema);
 
-    const result = await knl.sequelize().models.Usuario.findAll({
+    const result = await knl.sequelize().models.grupo.findAll({
         where : {
-            username : req.body.username
+            produto : req.body.produto
         }
     });
 
     knl.createException('0006', '', !knl.objects.isEmptyArray(result));
-    knl.createException('0007', '', req.body.password != req.body.cpassword);
+  ;
 
-    const user = knl.sequelize().models.Usuario.build({
-        name : req.body.name,
-        username : req.body.username,
-        password : md5(req.body.password),
-        status   : 1
+    const user = knl.sequelize().models.grupo.build({
+        produto : req.body.produto,
+        descrição : req.body.descrição
     });
 
     await user.save();
     resp.end();
 }, securityConsts.USER_TYPE_PUBLIC);
+
+knl.get('group', async(req, resp) => {
+    const result = await knl.sequelize().models.grupo.findAll({
+    });
+    resp.send(result)
+});
+
+knl.put('group', async(req, resp) => {
+    const result = await knl.sequelize().models.grupo.update({
+        produto:req.body.produto,
+        descrição:req.body.descrição,
+        
+    }, {
+        where : {
+        id : req.body.id
+    }});
+    
+    resp.send(result);
+});
+
+knl.delete('group', async(req, resp) => {
+        const result = await knl.sequelize().models.grupo.destroy({
+            where : {
+                id : req.body.id
+            }
+        });
+        req.send(user);
+});
