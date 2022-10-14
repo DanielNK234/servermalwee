@@ -1,4 +1,7 @@
 const { Sequelize } = require("sequelize");
+const groupModels = require("./group-models");
+const subgroupModels = require("./subgroup-model");
+
 
 module.exports = (sequelize) => {
     sequelize.define('subgrupo', {
@@ -14,10 +17,11 @@ module.exports = (sequelize) => {
             allowNull : false
         },
         fkgrupo :{
-            type:Sequelize.INTEGER.UNSIGNED,
+            type:Sequelize.INTEGER,
             references: 'grupo',
-            referenceKey: 'idgrupo'
+            referenceKey: 'id',
+            allowNull:false
         }
     })
-    grupo.hasMany(subgrupo, {foreignKey: 'fkgrupo'})
+   
 }
