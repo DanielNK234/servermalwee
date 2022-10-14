@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define('subgrupo', {
+    sequelize.define('coleção', {
 
         id : {
             type : Sequelize.INTEGER.UNSIGNED,
@@ -12,12 +12,7 @@ module.exports = (sequelize) => {
         descrição : {
             type : Sequelize.STRING(200),
             allowNull : false
-        },
-        fkgrupo :{
-            type:Sequelize.INTEGER.UNSIGNED,
-            references: 'grupo',
-            referenceKey: 'idgrupo'
         }
     })
-    grupo.hasMany(subgrupo, {foreignKey: 'fkgrupo'})
+
 }
